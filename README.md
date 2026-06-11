@@ -24,7 +24,7 @@ See the [picard (music) README](./picard%20(music)/README.md) for full documenta
 
 ---
 
-## Skills demonstrated
+## Capabilities
 
 - PowerShell scripting : parameters, pipeline processing, error handling, progress reporting
 - Regex-based filename normalization for fuzzy file matching
