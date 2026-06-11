@@ -1,6 +1,6 @@
 # homelab
 
-A collection of PowerShell scripts and automation tools for managing a self-hosted home media server. Built around a Plex setup with DVR recordings, these scripts solve real problems — deduplicating recordings, organizing files, combining video segments, and more.
+A collection of PowerShell scripts and automation tools for managing a self-hosted home media server. Built around a Plex setup with DVR recordings, these scripts solve real problems: deduplicating recordings, organizing files, combining video segments, and more.
 
 Each script is written to be reusable, parameterized, and safe to run with dry-run modes where destructive operations are involved.
 
