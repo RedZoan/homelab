@@ -95,7 +95,7 @@ foreach ($directory in $directoriesToProcess) {
 
     foreach ($baseNameGroup in $filesByBaseName) {
         Write-DebugMessage "Analyzing base name group: '$($baseNameGroup.Name)' with $($baseNameGroup.Count) file(s)."
-        
+
         if ($baseNameGroup.Count -gt 1) {
             Write-DebugMessage "Found potential duplicates for '$($baseNameGroup.Name)'."
             $duplicatePattern = '\s\(\d+\)(?=\.[^.]+$)'
@@ -105,13 +105,12 @@ foreach ($directory in $directoriesToProcess) {
             if ($originals.Count -eq 1) {
                 $originalFile = $originals[0]
                 Write-DebugMessage "Identified original file: '$($originalFile.Name)' (Size: $($originalFile.Length) bytes)."
-                
+
                 $duplicateFiles = $baseNameGroup.Group | Where-Object { $_.FullName -ne $originalFile.FullName }
 
                 foreach ($duplicateFile in $duplicateFiles) {
                     Write-DebugMessage "--> Checking candidate: '$($duplicateFile.Name)' (Size: $($duplicateFile.Length) bytes)."
                     try {
-                        # NEW LOGIC: Check if the absolute difference in size is within the tolerance
                         $sizeDifference = [math]::Abs($originalFile.Length - $duplicateFile.Length)
                         if ($sizeDifference -le $SizeToleranceBytes) {
                             Write-DebugMessage "--> SIZE MATCH (Difference: $sizeDifference bytes). Preparing to delete '$($duplicateFile.Name)'."
@@ -150,4 +149,3 @@ foreach ($directory in $directoriesToProcess) {
 }
 
 Write-Host "Duplicate file cleanup complete. See log at '$LogFilePath' for details."
-

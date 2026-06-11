@@ -11,7 +11,7 @@
 
     Results are displayed on screen and exported to a CSV file of your choosing.
 
-    Use dvr-file-compare.ps1 to find the inverse — files in the source that DO have a match.
+    Use dvr-file-compare.ps1 to find the inverse : files in the source that DO have a match.
 
 .PARAMETER SourceDirectory
     The root folder to scan for source media files. Searched recursively.

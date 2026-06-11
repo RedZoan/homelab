@@ -11,7 +11,7 @@
 
     Results are displayed on screen and exported to a CSV file of your choosing.
 
-    Use dvr-file-unique.ps1 to find the inverse — files in the source that have NO match.
+    Use dvr-file-unique.ps1 to find the inverse : files in the source that have NO match.
 
 .PARAMETER SourceDirectory
     The root folder to scan for source media files. Searched recursively.

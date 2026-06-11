@@ -17,6 +17,8 @@ PowerShell scripts for managing a Plex-based media library. These tools handle c
 
 ### DVR & Duplicate Management
 
+> Looking for general-purpose duplicate file removal? See [`delete_duplicates.ps1` and `delete_duplicates-v5.ps1`](../picard%20(music)/README.md) in the `picard (music)` folder : both work equally well on video and other file types.
+
 #### `Move-DVRDupesv3.ps1`
 Scans a source directory for media files and moves any that already exist in a destination (master) library to a separate duplicates folder. Uses fuzzy filename matching : it strips episode codes, bracketed tags, years, and network suffixes before comparing, so logically identical files are matched even if named differently. Supports `-DryRun` to preview actions without moving anything. Uses Robocopy for reliable moves over network shares.
 
@@ -26,19 +28,6 @@ Scans a source directory for media files and moves any that already exist in a d
 
 # Live run
 .\Move-DVRDupesv3.ps1 -SourceDirectory "\\nas\dvr" -DestinationDirectory "\\nas\plex\tv" -DupeDestinationDirectory "\\nas\dupes"
-```
-
----
-
-#### `delete_duplicates.ps1`
-Recursively finds and deletes files that are Windows-style copies : i.e., `file (1).ext`, `file (2).ext` alongside the original `file.ext`. Confirms a size match (within a configurable byte tolerance) before deleting. Logs every action to a CSV. Supports `-WhatIf` for a safe dry run and `-DebugMode` for verbose output.
-
-```powershell
-# Dry run
-.\delete_duplicates.ps1 -Path "C:\Music" -LogFilePath "C:\temp\log.csv" -WhatIf
-
-# Live run with a 500-byte size tolerance
-.\delete_duplicates.ps1 -Path "C:\Music" -LogFilePath "C:\temp\log.csv" -SizeToleranceBytes 500
 ```
 
 ---
@@ -66,7 +55,7 @@ The inverse of `dvr-file-compare.ps1` : reports media files in the source that h
 ### Video Processing
 
 #### `combine-recursive-v2.ps1`
-Recursively scans a root directory for subdirectories containing two or more media files, then uses FFmpeg to concatenate them into a single output file per folder. Files are joined in alphabetical order using FFmpeg's concat demuxer (stream copy; no re-encoding). Combined files are saved to the script's own directory, prefixed with the source subfolder name.
+Recursively scans a root directory for subdirectories containing two or more media files, then uses FFmpeg to concatenate them into a single output file per folder. Files are joined in alphabetical order using FFmpeg's concat demuxer (stream copy : no re-encoding). Combined files are saved to the script's own directory, prefixed with the source subfolder name.
 
 Set `$customFFmpegPath` in the script to your FFmpeg executable, or leave it empty to use FFmpeg from your system PATH.
 

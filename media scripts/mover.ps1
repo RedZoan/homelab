@@ -155,14 +155,14 @@ foreach ($file in $filesToProcess) {
         Write-Warning "  - Does the account running the script have WRITE permissions to '$fullFolderPath'?"
         Write-Warning "  - Does the account running the script have DELETE permissions for '$($file.FullName)' in '$($file.DirectoryName)'?"
         if (!(Test-Path -LiteralPath $file.FullName)) {
-            Write-Warning "  DIAGNOSTIC: Source file no longer exists — the move may have partially succeeded."
+            Write-Warning "  DIAGNOSTIC: Source file no longer exists : the move may have partially succeeded."
         } else {
             Write-Warning "  DIAGNOSTIC: Source file still exists at the original location."
         }
         if (Test-Path -LiteralPath $destinationFilePath) {
-            Write-Warning "  DIAGNOSTIC: File exists at destination — the copy succeeded but source deletion may have failed."
+            Write-Warning "  DIAGNOSTIC: File exists at destination : the copy succeeded but source deletion may have failed."
         } else {
-            Write-Warning "  DIAGNOSTIC: File does not exist at destination — the copy did not complete."
+            Write-Warning "  DIAGNOSTIC: File does not exist at destination : the copy did not complete."
         }
     }
     Write-Host "--------------------------------------------------"
