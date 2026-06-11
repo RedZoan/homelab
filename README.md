@@ -1,6 +1,6 @@
 # homelab
 
-A collection of PowerShell scripts and automation tools for managing a self-hosted home media server. Built around a Plex setup with DVR recordings and a MusicBrainz Picard music library, these scripts solve real problems : deduplicating recordings, syncing re-tagged files, organizing folders, combining video segments, etc.
+A collection of PowerShell scripts and automation tools for managing a self-hosted home media server. Built around a Plex setup with DVR recordings and a MusicBrainz Picard music library: deduplicating recordings, syncing re-tagged files, organizing folders, combining video segments, etc.
 
 Each script is written to be reusable, parameterized, and safe to run with dry-run modes where destructive operations are involved.
 
