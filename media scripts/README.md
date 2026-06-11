@@ -6,10 +6,10 @@ PowerShell scripts for managing a Plex-based media library. These tools handle c
 
 ## Prerequisites
 
-- **PowerShell 5.1+** — required for all scripts
-- **[FFmpeg](https://ffmpeg.org/download.html)** — required by `combine-recursive-v2.ps1`
-- **[MediaInfo CLI](https://mediaarea.net/en/MediaInfo/Download/Windows)** — required by `mediainfo-adder.ps1`
-- **Robocopy** — required by `Move-DVRDupesv3.ps1` (included with Windows)
+- **PowerShell 5.1+** : required for all scripts
+- **[FFmpeg](https://ffmpeg.org/download.html)** : required by `combine-recursive-v2.ps1`
+- **[MediaInfo CLI](https://mediaarea.net/en/MediaInfo/Download/Windows)** : required by `mediainfo-adder.ps1`
+- **Robocopy** : required by `Move-DVRDupesv3.ps1` (included with Windows)
 
 ---
 
@@ -18,10 +18,10 @@ PowerShell scripts for managing a Plex-based media library. These tools handle c
 ### DVR & Duplicate Management
 
 #### `Move-DVRDupesv3.ps1`
-Scans a source directory for media files and moves any that already exist in a destination (master) library to a separate duplicates folder. Uses fuzzy filename matching — it strips episode codes, bracketed tags, years, and network suffixes before comparing, so logically identical files are matched even if named differently. Supports `-DryRun` to preview actions without moving anything. Uses Robocopy for reliable moves over network shares.
+Scans a source directory for media files and moves any that already exist in a destination (master) library to a separate duplicates folder. Uses fuzzy filename matching : it strips episode codes, bracketed tags, years, and network suffixes before comparing, so logically identical files are matched even if named differently. Supports `-DryRun` to preview actions without moving anything. Uses Robocopy for reliable moves over network shares.
 
 ```powershell
-# Dry run — see what would be moved without touching any files
+# Dry run : see what would be moved without touching any files
 .\Move-DVRDupesv3.ps1 -SourceDirectory "\\nas\dvr" -DestinationDirectory "\\nas\plex\tv" -DupeDestinationDirectory "\\nas\dupes" -DryRun
 
 # Live run
@@ -31,7 +31,7 @@ Scans a source directory for media files and moves any that already exist in a d
 ---
 
 #### `delete_duplicates.ps1`
-Recursively finds and deletes files that are Windows-style copies — i.e., `file (1).ext`, `file (2).ext` alongside the original `file.ext`. Confirms a size match (within a configurable byte tolerance) before deleting. Logs every action to a CSV. Supports `-WhatIf` for a safe dry run and `-DebugMode` for verbose output.
+Recursively finds and deletes files that are Windows-style copies : i.e., `file (1).ext`, `file (2).ext` alongside the original `file.ext`. Confirms a size match (within a configurable byte tolerance) before deleting. Logs every action to a CSV. Supports `-WhatIf` for a safe dry run and `-DebugMode` for verbose output.
 
 ```powershell
 # Dry run
@@ -44,7 +44,7 @@ Recursively finds and deletes files that are Windows-style copies — i.e., `fil
 ---
 
 #### `dvr-file-compare.ps1`
-Compares two directories and reports media files that exist in **both** — useful for confirming what's already been ingested into your library. Uses the same fuzzy filename cleaning as `Move-DVRDupesv3.ps1`. Outputs results to the console and exports a CSV.
+Compares two directories and reports media files that exist in **both** : useful for confirming what's already been ingested into your library. Uses the same fuzzy filename cleaning as `Move-DVRDupesv3.ps1`. Outputs results to the console and exports a CSV.
 
 ```powershell
 .\dvr-file-compare.ps1
@@ -54,7 +54,7 @@ Compares two directories and reports media files that exist in **both** — usef
 ---
 
 #### `dvr-file-unique.ps1`
-The inverse of `dvr-file-compare.ps1` — reports media files in the source that have **no match** in the destination. Use this to find recordings that haven't been added to your library yet.
+The inverse of `dvr-file-compare.ps1` : reports media files in the source that have **no match** in the destination. Use this to find recordings that haven't been added to your library yet.
 
 ```powershell
 .\dvr-file-unique.ps1
@@ -66,7 +66,7 @@ The inverse of `dvr-file-compare.ps1` — reports media files in the source that
 ### Video Processing
 
 #### `combine-recursive-v2.ps1`
-Recursively scans a root directory for subdirectories containing two or more media files, then uses FFmpeg to concatenate them into a single output file per folder. Files are joined in alphabetical order using FFmpeg's concat demuxer (stream copy — no re-encoding). Combined files are saved to the script's own directory, prefixed with the source subfolder name.
+Recursively scans a root directory for subdirectories containing two or more media files, then uses FFmpeg to concatenate them into a single output file per folder. Files are joined in alphabetical order using FFmpeg's concat demuxer (stream copy; no re-encoding). Combined files are saved to the script's own directory, prefixed with the source subfolder name.
 
 Set `$customFFmpegPath` in the script to your FFmpeg executable, or leave it empty to use FFmpeg from your system PATH.
 
@@ -104,7 +104,7 @@ Moves subfolders based on whether their name contains a TMDB or TVDB ID tag (e.g
 ### Reporting & Utilities
 
 #### `Directory-Crawler.ps1`
-Maps a directory tree to a CSV file, with optional depth limiting. Each row represents one subdirectory and includes its full path, depth level, and individual folder names split into separate `Level_1`, `Level_2`, etc. columns — making it easy to analyze large folder hierarchies in Excel. Output is saved to `DirectoryStructure.csv` on the Desktop.
+Maps a directory tree to a CSV file, with optional depth limiting. Each row represents one subdirectory and includes its full path, depth level, and individual folder names split into separate `Level_1`, `Level_2`, etc. columns : making it easy to analyze large folder hierarchies in Excel. Output is saved to `DirectoryStructure.csv` on the Desktop.
 
 ```powershell
 .\Directory-Crawler.ps1
@@ -114,7 +114,7 @@ Maps a directory tree to a CSV file, with optional depth limiting. Each row repr
 ---
 
 #### `rsync-folder-text-file.ps1`
-Generates a plain text file listing all subdirectory paths under a given root — formatted for use as an rsync source list. Useful when syncing a complex directory tree to another machine or NAS.
+Generates a plain text file listing all subdirectory paths under a given root : formatted for use as an rsync source list. Useful when syncing a complex directory tree to another machine or NAS.
 
 ```powershell
 .\rsync-folder-text-file.ps1
