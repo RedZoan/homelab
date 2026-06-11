@@ -43,7 +43,6 @@
 #>
 
 param(
-param(
     [Parameter(Mandatory=$true, HelpMessage="Enter the path to the DIRECTORY containing the .txt robocopy lists.")]
     [string]$listFileDirectory,
 
